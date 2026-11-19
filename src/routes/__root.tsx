@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "sonner";
 
+import { InstallProvider } from '../components/InstallApp';
 import appCss from "../styles.css?url";
 import { LibraryProvider } from "../lib/library-store";
 import { SecretGesture } from "../components/SecretGesture";
@@ -96,6 +97,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/reader-180.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -135,7 +138,7 @@ function RootComponent() {
         <SecretGesture />
         <Toaster position="top-center" richColors />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
+        <InstallProvider><Outlet /></InstallProvider>
       </LibraryProvider>
     </QueryClientProvider>
   );

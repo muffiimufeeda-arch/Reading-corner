@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/Logo";
+import { InstallApp } from '@/components/InstallApp';
 import heroBooks from "@/assets/hero-books.jpg";
 
 export const Route = createFileRoute("/")({
@@ -94,6 +95,7 @@ function Welcome() {
           >
             Explore Books
           </Link>
+          <InstallApp />
         </div>
 
         <p className="mt-6 text-xs text-muted-foreground">
