@@ -1,13 +1,35 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
-const DATA_DIR = path.resolve(process.cwd(), ".data");
+function resolveDataDir(): string {
+  const envDir = process.env["DATA_DIR"]?.trim();
+  if (envDir) {
+    const abs = path.resolve(envDir);
+    fs.mkdirSync(path.join(abs, "media"), { recursive: true });
+    return abs;
+  }
+
+  const localDir = path.resolve(process.cwd(), ".data");
+  if (process.env["VERCEL"] !== "1") {
+    try {
+      fs.mkdirSync(path.join(localDir, "media"), { recursive: true });
+      return localDir;
+    } catch {
+      /* read-only filesystem fallback */
+    }
+  }
+
+  const tmpDir = path.join(os.tmpdir(), "reading-corner-data");
+  fs.mkdirSync(path.join(tmpDir, "media"), { recursive: true });
+  return tmpDir;
+}
+
+const DATA_DIR = resolveDataDir();
 const MEDIA_DIR = path.join(DATA_DIR, "media");
 const DB_PATH = path.join(DATA_DIR, "reading-corner.sqlite");
-
-fs.mkdirSync(MEDIA_DIR, { recursive: true });
 
 export const mediaDir = MEDIA_DIR;
 export const db = new DatabaseSync(DB_PATH);

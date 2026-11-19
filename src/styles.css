@@ -229,6 +229,35 @@ html[data-secret-theme="dark"] {
   }
 }
 
+@keyframes glassSheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  45%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@utility glass-sheen {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 45%;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%
+    );
+    animation: glassSheen 6.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+}
+
 /* Reading surface themes */
 .reader-light {
   --reader-bg: oklch(1 0.004 85);

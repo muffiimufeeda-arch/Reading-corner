@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { InstallApp } from '@/components/InstallApp';
+import { InstallApp } from "@/components/InstallApp";
 import { RotateCcw } from "lucide-react";
 
 import { AppShell, PageHeader } from "@/components/AppShell";

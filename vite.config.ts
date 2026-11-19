@@ -8,7 +8,7 @@ export default defineConfig({
     vite: { installDevServerMiddleware: true },
   },
   nitro: {
-    preset: process.env.VERCEL === "1" ? "vercel" : "node-server",
+    preset: process.env["VERCEL"] === "1" ? "vercel" : "node-server",
   },
   vite: {
     server: {

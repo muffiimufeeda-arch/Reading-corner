@@ -312,10 +312,8 @@ export function InstagramProfileView({
               }
             }}
             className={cn(
-              "inline-flex min-h-[42px] items-center gap-2 rounded-2xl border px-3.5 text-xs font-bold backdrop-blur-xl transition hover:scale-[1.01]",
-              theme.surfaceGlass,
-              theme.border,
-              theme.cardShadow,
+              "glass-sheen inline-flex min-h-[42px] items-center gap-2 rounded-full border px-4 text-xs font-bold transition hover:scale-[1.02]",
+              theme.glassPill,
             )}
           >
             <ArrowLeft className="size-4" />
@@ -326,9 +324,8 @@ export function InstagramProfileView({
           <Link
             to="/home"
             className={cn(
-              "inline-flex min-h-[42px] items-center gap-1.5 rounded-2xl border px-3.5 text-xs font-bold backdrop-blur-xl transition hover:scale-[1.01]",
-              theme.surfaceGlass,
-              theme.border,
+              "glass-sheen inline-flex min-h-[42px] items-center gap-1.5 rounded-full border px-4 text-xs font-bold transition hover:scale-[1.02]",
+              theme.glassPill,
             )}
           >
             <BookOpen className="size-4" />
@@ -425,8 +422,8 @@ export function InstagramProfileView({
                   type="button"
                   onClick={() => setEditingProfile((s) => !s)}
                   className={cn(
-                    "min-h-[40px] rounded-xl px-4 py-2 text-xs font-bold transition",
-                    theme.surfaceMuted,
+                    "min-h-[40px] rounded-full border px-4 py-2 text-xs font-bold transition",
+                    theme.glassRow,
                   )}
                 >
                   {editingProfile ? "Cancel Edit" : "Edit Profile"}
@@ -435,7 +432,7 @@ export function InstagramProfileView({
                   type="button"
                   onClick={() => setSection("nfc")}
                   className={cn(
-                    "inline-flex min-h-[40px] items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold shadow-sm transition",
+                    "glass-sheen inline-flex min-h-[40px] items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold shadow-sm transition hover:scale-[1.02]",
                     theme.accentBg,
                   )}
                 >
@@ -595,9 +592,8 @@ export function InstagramProfileView({
         {/* Profile Sub-navigation (Gallery, NFC Card, Theme, Settings) */}
         <div
           className={cn(
-            "grid grid-cols-4 gap-1.5 rounded-2xl border p-1.5 backdrop-blur-xl",
+            "grid grid-cols-4 gap-1.5 rounded-full border p-1.5 backdrop-blur-2xl",
             theme.surfaceGlass,
-            theme.border,
           )}
         >
           {(
@@ -615,12 +611,19 @@ export function InstagramProfileView({
                 type="button"
                 onClick={() => setSection(id)}
                 className={cn(
-                  "flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-bold transition",
-                  active ? theme.accentBg : theme.mutedText,
+                  "relative flex min-h-[44px] items-center justify-center gap-1.5 rounded-full px-2 text-xs font-bold transition-colors",
+                  active ? "text-white" : theme.mutedText,
                 )}
               >
-                <Icon className="size-4 shrink-0" />
-                <span className="truncate">{label}</span>
+                {active && (
+                  <motion.span
+                    layoutId="profileSectionPill"
+                    transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                    className={cn("glass-sheen absolute inset-0 rounded-full", theme.navActiveBg)}
+                  />
+                )}
+                <Icon className="relative z-10 size-4 shrink-0" />
+                <span className="relative z-10 truncate">{label}</span>
               </button>
             );
           })}

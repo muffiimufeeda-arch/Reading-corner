@@ -3,6 +3,7 @@ import {
   AlertCircle,
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Camera,
   CheckCircle2,
   Eye,
@@ -12,6 +13,7 @@ import {
   Moon,
   Phone,
   ShieldCheck,
+  Sparkles,
   Sun,
   User,
 } from "lucide-react";
@@ -244,32 +246,42 @@ function AuthPage() {
   return (
     <div
       className={cn(
-        "relative min-h-[100dvh] overflow-x-hidden px-4 py-6 transition-colors duration-300 sm:px-6 sm:py-10",
+        "relative min-h-[100dvh] overflow-x-hidden px-4 py-6 transition-colors duration-500 sm:px-6 sm:py-10",
         darkBackdrop
-          ? "bg-gradient-to-b from-[#070a13] via-[#0d1426] to-[#080a10] text-white"
-          : "bg-gradient-to-br from-[#dce9ff] via-[#eef3ff] to-[#fbeaff] text-[#111827]",
+          ? "bg-gradient-to-b from-[#060913] via-[#0d1426] to-[#07090f] text-white"
+          : "bg-gradient-to-br from-[#d8e6ff] via-[#eef3ff] to-[#fbeaff] text-[#111827]",
       )}
     >
-      {/* Subtle 3D Studio Ambient Orbs */}
+      {/* Drifting 3D Studio Ambient Orbs */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <motion.div
-          animate={{ scale: [1, 1.07, 1], opacity: [0.45, 0.65, 0.45] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            x: [0, 26, -14, 0],
+            y: [0, 18, -12, 0],
+            scale: [1, 1.09, 0.96, 1],
+            opacity: [0.45, 0.68, 0.45],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           className={cn(
-            "absolute -left-24 -top-24 size-96 rounded-full blur-3xl",
+            "absolute -left-24 -top-24 size-[26rem] rounded-full blur-3xl",
             darkBackdrop
-              ? "bg-gradient-to-tr from-[#2563eb]/35 via-[#e11d48]/25 to-[#4f46e5]/30"
-              : "bg-gradient-to-tr from-[#60a5fa]/40 via-[#f472b6]/25 to-[#818cf8]/35",
+              ? "bg-gradient-to-tr from-[#2563eb]/40 via-[#e11d48]/28 to-[#4f46e5]/32"
+              : "bg-gradient-to-tr from-[#60a5fa]/45 via-[#f472b6]/28 to-[#818cf8]/38",
           )}
         />
         <motion.div
-          animate={{ scale: [1.05, 1, 1.05], opacity: [0.35, 0.55, 0.35] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            x: [0, -24, 16, 0],
+            y: [0, -18, 12, 0],
+            scale: [1.05, 0.95, 1.08, 1.05],
+            opacity: [0.38, 0.58, 0.38],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
           className={cn(
-            "absolute -bottom-28 -right-24 size-96 rounded-full blur-3xl",
+            "absolute -bottom-28 -right-24 size-[26rem] rounded-full blur-3xl",
             darkBackdrop
-              ? "bg-gradient-to-tr from-[#e11d48]/25 via-[#2563eb]/25 to-[#6366f1]/30"
-              : "bg-gradient-to-tr from-[#f58529]/25 via-[#dd2a7b]/25 to-[#60a5fa]/35",
+              ? "bg-gradient-to-tr from-[#e11d48]/30 via-[#2563eb]/28 to-[#6366f1]/34"
+              : "bg-gradient-to-tr from-[#f58529]/28 via-[#dd2a7b]/28 to-[#60a5fa]/40",
           )}
         />
       </div>
@@ -284,10 +296,10 @@ function AuthPage() {
               type="button"
               onClick={() => navigate({ to: "/home" })}
               className={cn(
-                "inline-flex min-h-[42px] items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold backdrop-blur-md transition",
+                "glass-sheen inline-flex min-h-[42px] items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold backdrop-blur-xl transition hover:scale-[1.02]",
                 darkBackdrop
-                  ? "border-white/15 bg-white/10 text-white hover:bg-white/15"
-                  : "border-white/80 bg-white/75 text-[#1e293b] shadow-sm hover:bg-white",
+                  ? "border-white/20 bg-white/10 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.18)] hover:bg-white/15"
+                  : "border-white/90 bg-white/75 text-[#1e293b] shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),0_8px_20px_-8px_rgba(37,99,235,0.22)] hover:bg-white",
               )}
             >
               <ArrowLeft className="size-4" /> Reading Corner
@@ -298,10 +310,10 @@ function AuthPage() {
               onClick={() => setDarkBackdrop((d) => !d)}
               aria-label={darkBackdrop ? "Switch to light mode" : "Switch to dark mode"}
               className={cn(
-                "inline-flex min-h-[42px] items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold backdrop-blur-md transition",
+                "glass-sheen inline-flex min-h-[42px] items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold backdrop-blur-xl transition hover:scale-[1.02]",
                 darkBackdrop
-                  ? "border-white/15 bg-white/10 text-white hover:bg-white/15"
-                  : "border-white/80 bg-white/75 text-[#1e293b] shadow-sm hover:bg-white",
+                  ? "border-white/20 bg-white/10 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.18)] hover:bg-white/15"
+                  : "border-white/90 bg-white/75 text-[#1e293b] shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),0_8px_20px_-8px_rgba(37,99,235,0.22)] hover:bg-white",
               )}
             >
               {darkBackdrop ? <Sun className="size-4" /> : <Moon className="size-4" />}
@@ -316,7 +328,7 @@ function AuthPage() {
             className="mt-6"
           >
             <div className="flex items-center gap-3.5">
-              <div className="grid size-14 place-items-center rounded-2xl bg-gradient-to-tr from-[#2563eb] via-[#dd2a7b] to-[#f58529] p-2.5 shadow-[0_12px_28px_-8px_rgba(37,99,235,0.5)]">
+              <div className="glass-sheen grid size-14 place-items-center rounded-2xl bg-gradient-to-tr from-[#2563eb] via-[#dd2a7b] to-[#f58529] p-2.5 shadow-[0_12px_28px_-8px_rgba(37,99,235,0.55)]">
                 <Logo className="size-9" />
               </div>
               <div>
@@ -341,79 +353,157 @@ function AuthPage() {
               )}
             >
               <p className="flex items-center gap-2.5">
-                <Phone className="size-4 text-[#2563eb]" />
+                <span className="grid size-7 place-items-center rounded-full bg-[#2563eb]/15 text-[#2563eb]">
+                  <Phone className="size-3.5" />
+                </span>
                 Sign in across devices using your phone number and password only.
               </p>
               <p className="flex items-center gap-2.5">
-                <ShieldCheck className="size-4 text-[#dd2a7b]" />
+                <span className="grid size-7 place-items-center rounded-full bg-[#dd2a7b]/15 text-[#dd2a7b]">
+                  <ShieldCheck className="size-3.5" />
+                </span>
                 Every account receives a private, revocable NFC card link.
               </p>
               <p className="flex items-center gap-2.5">
-                <Lock className="size-4 text-[#f58529]" />
+                <span className="grid size-7 place-items-center rounded-full bg-[#f58529]/15 text-[#f58529]">
+                  <Lock className="size-3.5" />
+                </span>
                 Reading progress, bookmarks, media, and chats stay private to your account.
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Right 3D Layered Glassmorphic Card */}
+        {/* Right Layered 3D Dual-Tier Frosted Glass Card */}
         <motion.div
-          initial={{ opacity: 0, y: 18, rotateX: 4 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          style={{ perspective: 1000 }}
-          className="w-full"
+          initial={{ opacity: 0, y: 22, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 24 }}
+          className="relative w-full"
         >
+          {/* Upper Frosted Glass Studio Crest Card */}
           <div
             className={cn(
-              "rounded-[32px] border p-5 backdrop-blur-2xl sm:p-7",
+              "relative overflow-hidden rounded-t-[34px] border border-b-0 px-6 pb-10 pt-6 text-center backdrop-blur-2xl",
               darkBackdrop
-                ? "border-white/15 bg-[#121828]/88 text-white shadow-[0_24px_60px_-15px_rgba(37,99,235,0.35)]"
-                : "border-white/90 bg-white/92 text-[#0f172a] shadow-[0_24px_60px_-15px_rgba(37,99,235,0.28)]",
+                ? "border-[#3b82f6]/30 bg-gradient-to-b from-[#17213a]/82 to-[#0f1628]/74 text-white shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.2)]"
+                : "border-white/95 bg-gradient-to-b from-white/86 to-[#eff5ff]/78 text-[#0f172a] shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.95)]",
             )}
           >
-            {/* Mode Switcher */}
+            {/* Subtle specular shimmer inside upper crest */}
+            <div className="pointer-events-none absolute -right-12 -top-12 size-40 rounded-full bg-gradient-to-tr from-[#2563eb]/20 via-[#dd2a7b]/15 to-transparent blur-2xl" />
+
+            <div className="relative flex flex-col items-center">
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-sheen mb-3 inline-flex size-14 items-center justify-center rounded-2xl border border-white/50 bg-gradient-to-tr from-[#2563eb] via-[#dd2a7b] to-[#f58529] text-white shadow-[0_12px_26px_-6px_rgba(37,99,235,0.55)]"
+              >
+                {mode === "forgot" ? (
+                  <KeyRound className="size-6" />
+                ) : mode === "register" ? (
+                  <Sparkles className="size-6" />
+                ) : (
+                  <BookOpen className="size-6" />
+                )}
+              </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={mode}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                >
+                  <h2
+                    className={cn(
+                      "font-display text-2xl font-extrabold tracking-tight sm:text-[26px]",
+                      darkBackdrop
+                        ? "bg-gradient-to-r from-white via-[#bfdbfe] to-[#fbcfe8] bg-clip-text text-transparent"
+                        : "bg-gradient-to-r from-[#1d4ed8] via-[#2563eb] to-[#dd2a7b] bg-clip-text text-transparent",
+                    )}
+                  >
+                    {mode === "login"
+                      ? "Welcome Back"
+                      : mode === "register"
+                        ? "Create Your Account"
+                        : "Reset Password"}
+                  </h2>
+                  <p
+                    className={cn(
+                      "mt-1 text-xs font-medium",
+                      darkBackdrop ? "text-white/70" : "text-[#515c74]",
+                    )}
+                  >
+                    {mode === "login"
+                      ? "Login to continue your journey"
+                      : mode === "register"
+                        ? "One account per verified phone number"
+                        : "Verify your phone number with SMS OTP"}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Lower Overlapping Curved Frosted Form Sheet */}
+          <div
+            className={cn(
+              "relative -mt-5 rounded-[32px] border p-5 backdrop-blur-2xl sm:p-7",
+              darkBackdrop
+                ? "border-[#3b82f6]/35 bg-[#0e1526]/86 text-white shadow-[inset_0_1.5px_1px_rgba(147,197,253,0.24),0_26px_60px_-14px_rgba(37,99,235,0.42)]"
+                : "border-white/95 bg-white/88 text-[#0f172a] shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.98),0_26px_60px_-14px_rgba(37,99,235,0.3)]",
+            )}
+          >
+            {/* Spring Animated Mode Switcher */}
             {mode !== "forgot" ? (
               <div
                 className={cn(
-                  "grid grid-cols-2 gap-1.5 rounded-2xl p-1",
-                  darkBackdrop ? "bg-[#1b2236]" : "bg-[#eff4ff]",
+                  "grid grid-cols-2 gap-1.5 rounded-full border p-1",
+                  darkBackdrop
+                    ? "border-white/10 bg-[#172038]/85"
+                    : "border-white/90 bg-[#edf3ff]/90 shadow-inner",
                 )}
               >
-                <button
-                  type="button"
-                  onClick={() => switchMode("login")}
-                  className={cn(
-                    "min-h-[42px] rounded-xl text-xs font-bold transition-all",
-                    mode === "login"
-                      ? "bg-gradient-to-r from-[#2563eb] via-[#dd2a7b] to-[#f58529] text-white shadow-md"
-                      : darkBackdrop
-                        ? "text-white/70 hover:text-white"
-                        : "text-[#475569] hover:text-[#0f172a]",
-                  )}
-                >
-                  Login
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchMode("register")}
-                  className={cn(
-                    "min-h-[42px] rounded-xl text-xs font-bold transition-all",
-                    mode === "register"
-                      ? "bg-gradient-to-r from-[#2563eb] via-[#dd2a7b] to-[#f58529] text-white shadow-md"
-                      : darkBackdrop
-                        ? "text-white/70 hover:text-white"
-                        : "text-[#475569] hover:text-[#0f172a]",
-                  )}
-                >
-                  Create Account
-                </button>
+                {(
+                  [
+                    { id: "login", label: "Login" },
+                    { id: "register", label: "Create Account" },
+                  ] as const
+                ).map(({ id, label }) => {
+                  const active = mode === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => switchMode(id)}
+                      className={cn(
+                        "relative min-h-[42px] rounded-full text-xs font-bold transition-colors",
+                        active
+                          ? "text-white"
+                          : darkBackdrop
+                            ? "text-white/70 hover:text-white"
+                            : "text-[#475569] hover:text-[#0f172a]",
+                      )}
+                    >
+                      {active && (
+                        <motion.span
+                          layoutId="authModePill"
+                          transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                          className="glass-sheen absolute inset-0 rounded-full bg-gradient-to-r from-[#2563eb] via-[#dd2a7b] to-[#f58529] shadow-[0_8px_20px_-4px_rgba(37,99,235,0.5)]"
+                        />
+                      )}
+                      <span className="relative z-10">{label}</span>
+                    </button>
+                  );
+                })}
               </div>
             ) : (
               <button
                 type="button"
                 onClick={() => switchMode("login")}
-                className="inline-flex min-h-[36px] items-center gap-1.5 text-xs font-bold text-[#2563eb]"
+                className="inline-flex min-h-[36px] items-center gap-1.5 text-xs font-bold text-[#3b82f6] hover:underline"
               >
                 <ArrowLeft className="size-3.5" /> Back to Login
               </button>
@@ -422,32 +512,15 @@ function AuthPage() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={mode}
-                initial={{ opacity: 0, x: 8 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -8 }}
-                transition={{ duration: 0.18 }}
-                className="mt-5"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="mt-4"
               >
-                <h2 className="font-display text-2xl font-extrabold tracking-tight">
-                  {mode === "login"
-                    ? "Welcome Back"
-                    : mode === "register"
-                      ? "Create Your Account"
-                      : "Reset Password"}
-                </h2>
-                <p
-                  className={cn("mt-1 text-xs", darkBackdrop ? "text-white/65" : "text-[#64748b]")}
-                >
-                  {mode === "login"
-                    ? "Sign in with your phone number and password to open Chat."
-                    : mode === "register"
-                      ? "One account per verified phone number. Syncs books & chats."
-                      : "Verify your phone number with SMS OTP to set a new password."}
-                </p>
-
                 {/* Non-destructive legacy local account helper */}
                 {mode === "register" && legacyAccounts.length > 0 && !fullName && (
-                  <div className="mt-3 rounded-2xl border border-amber-300/60 bg-amber-50 p-3 text-xs text-amber-950">
+                  <div className="mb-3 rounded-2xl border border-amber-300/60 bg-amber-50/90 p-3 text-xs text-amber-950">
                     <p className="font-semibold">Previous device profile found</p>
                     <p className="mt-0.5 text-amber-800">
                       Link your phone number to upgrade “{legacyAccounts[0]?.username}” without
@@ -462,21 +535,21 @@ function AuthPage() {
                         if (first.bio) setBio(first.bio);
                         if (first.dp) setDp(first.dp);
                       }}
-                      className="mt-2 rounded-lg bg-amber-900 px-3 py-1.5 text-[11px] font-bold text-white"
+                      className="mt-2 rounded-full bg-amber-900 px-3.5 py-1.5 text-[11px] font-bold text-white"
                     >
                       Pre-fill profile details
                     </button>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} noValidate className="mt-4 space-y-3.5">
+                <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
                   {mode === "register" && (
                     <>
                       <div className="flex items-center gap-3.5">
                         <button
                           type="button"
                           onClick={() => fileRef.current?.click()}
-                          className="relative grid size-16 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-tr from-[#2563eb] via-[#dd2a7b] to-[#f58529] p-0.5 shadow-md"
+                          className="glass-sheen relative grid size-16 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-tr from-[#2563eb] via-[#dd2a7b] to-[#f58529] p-0.5 shadow-md"
                           aria-label="Choose profile photo"
                         >
                           <span
@@ -517,13 +590,13 @@ function AuthPage() {
 
                       <div
                         className={cn(
-                          "flex items-center gap-2.5 rounded-full border p-1.5 shadow-sm",
+                          "flex items-center gap-2.5 rounded-full border p-1.5 transition focus-within:ring-2 focus-within:ring-[#2563eb]/35",
                           darkBackdrop
-                            ? "border-white/15 bg-[#1b2236]"
-                            : "border-[#dbe4f6] bg-[#f6f9ff]",
+                            ? "border-white/15 bg-[#172038]/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                            : "border-white/95 bg-[#f4f7ff]/95 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                         )}
                       >
-                        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#4f46e5] text-white shadow">
+                        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#4f46e5] text-white shadow-[0_6px_14px_-4px_rgba(37,99,235,0.65)]">
                           <User className="size-4" />
                         </span>
                         <input
@@ -538,17 +611,17 @@ function AuthPage() {
                     </>
                   )}
 
-                  {/* Pill Phone Input with Circular Icon Badge */}
+                  {/* Pill Phone Input with Circular 3D Glowing Icon Badge */}
                   <div className="flex gap-2">
                     <select
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
                       aria-label="Country code"
                       className={cn(
-                        "rounded-full border px-3 py-2.5 text-xs font-bold outline-none shadow-sm",
+                        "rounded-full border px-3 py-2.5 text-xs font-bold outline-none transition",
                         darkBackdrop
-                          ? "border-white/15 bg-[#1b2236] text-white"
-                          : "border-[#dbe4f6] bg-[#f6f9ff] text-[#0f172a]",
+                          ? "border-white/15 bg-[#172038]/85 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                          : "border-white/95 bg-[#f4f7ff]/95 text-[#0f172a] shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                       )}
                     >
                       {COUNTRY_CODES.map((c) => (
@@ -559,13 +632,13 @@ function AuthPage() {
                     </select>
                     <div
                       className={cn(
-                        "flex flex-1 items-center gap-2.5 rounded-full border p-1.5 shadow-sm",
+                        "flex flex-1 items-center gap-2.5 rounded-full border p-1.5 transition focus-within:ring-2 focus-within:ring-[#2563eb]/35",
                         darkBackdrop
-                          ? "border-white/15 bg-[#1b2236]"
-                          : "border-[#dbe4f6] bg-[#f6f9ff]",
+                          ? "border-white/15 bg-[#172038]/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                          : "border-white/95 bg-[#f4f7ff]/95 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                       )}
                     >
-                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#3b82f6] text-white shadow">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#3b82f6] text-white shadow-[0_6px_14px_-4px_rgba(37,99,235,0.65)]">
                         <Phone className="size-4" />
                       </span>
                       <input
@@ -586,8 +659,8 @@ function AuthPage() {
                       className={cn(
                         "space-y-2.5 rounded-2xl border p-3.5",
                         darkBackdrop
-                          ? "border-white/15 bg-[#1b2236]"
-                          : "border-[#dbe4f6] bg-[#f6f9ff]",
+                          ? "border-white/15 bg-[#172038]/85"
+                          : "border-white/90 bg-[#f4f7ff]/95 shadow-sm",
                       )}
                     >
                       <div className="flex items-center justify-between gap-2">
@@ -598,7 +671,7 @@ function AuthPage() {
                           onClick={() =>
                             void handleSendOtp(mode === "forgot" ? "reset_password" : "register")
                           }
-                          className="rounded-full bg-[#2563eb] px-3.5 py-1.5 text-[11px] font-bold text-white transition hover:opacity-90 disabled:opacity-50"
+                          className="glass-sheen rounded-full bg-[#2563eb] px-3.5 py-1.5 text-[11px] font-bold text-white shadow-sm transition hover:opacity-95 disabled:opacity-50"
                         >
                           {otpRequested ? "Resend OTP" : "Send SMS OTP"}
                         </button>
@@ -643,13 +716,13 @@ function AuthPage() {
                   {/* Password Pill Input */}
                   <div
                     className={cn(
-                      "flex items-center gap-2.5 rounded-full border p-1.5 shadow-sm",
+                      "flex items-center gap-2.5 rounded-full border p-1.5 transition focus-within:ring-2 focus-within:ring-[#2563eb]/35",
                       darkBackdrop
-                        ? "border-white/15 bg-[#1b2236]"
-                        : "border-[#dbe4f6] bg-[#f6f9ff]",
+                        ? "border-white/15 bg-[#172038]/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                        : "border-white/95 bg-[#f4f7ff]/95 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                     )}
                   >
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#dd2a7b] text-white shadow">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#2563eb] to-[#dd2a7b] text-white shadow-[0_6px_14px_-4px_rgba(221,42,123,0.55)]">
                       <Lock className="size-4" />
                     </span>
                     <input
@@ -679,13 +752,13 @@ function AuthPage() {
                   {mode !== "login" && (
                     <div
                       className={cn(
-                        "flex items-center gap-2.5 rounded-full border p-1.5 shadow-sm",
+                        "flex items-center gap-2.5 rounded-full border p-1.5 transition focus-within:ring-2 focus-within:ring-[#2563eb]/35",
                         darkBackdrop
-                          ? "border-white/15 bg-[#1b2236]"
-                          : "border-[#dbe4f6] bg-[#f6f9ff]",
+                          ? "border-white/15 bg-[#172038]/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                          : "border-white/95 bg-[#f4f7ff]/95 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                       )}
                     >
-                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#dd2a7b] to-[#8134af] text-white shadow">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-tr from-[#dd2a7b] to-[#8134af] text-white shadow-[0_6px_14px_-4px_rgba(129,52,175,0.55)]">
                         <Lock className="size-4" />
                       </span>
                       <input
@@ -707,10 +780,10 @@ function AuthPage() {
                       placeholder="Short bio or favorite genre (optional)"
                       maxLength={180}
                       className={cn(
-                        "w-full rounded-full border px-4 py-3 text-sm outline-none shadow-sm",
+                        "w-full rounded-full border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-[#2563eb]/35",
                         darkBackdrop
-                          ? "border-white/15 bg-[#1b2236] text-white"
-                          : "border-[#dbe4f6] bg-[#f6f9ff] text-[#0f172a]",
+                          ? "border-white/15 bg-[#172038]/85 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                          : "border-white/95 bg-[#f4f7ff]/95 text-[#0f172a] shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_12px_-6px_rgba(37,99,235,0.22)]",
                       )}
                     />
                   )}
@@ -720,7 +793,7 @@ function AuthPage() {
                       <button
                         type="button"
                         onClick={() => switchMode("forgot")}
-                        className="text-xs font-bold text-[#2563eb] hover:underline"
+                        className="text-xs font-bold text-[#3b82f6] hover:underline"
                       >
                         Forgot Password?
                       </button>
@@ -728,23 +801,33 @@ function AuthPage() {
                   )}
 
                   {error && (
-                    <div className="flex items-start gap-2 rounded-2xl bg-rose-500/15 px-3.5 py-2.5 text-xs font-semibold text-rose-500">
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-start gap-2 rounded-2xl border border-rose-400/30 bg-rose-500/15 px-3.5 py-2.5 text-xs font-semibold text-rose-500"
+                    >
                       <AlertCircle className="mt-0.5 size-4 shrink-0" />
                       <span>{error}</span>
-                    </div>
+                    </motion.div>
                   )}
 
                   {info && (
-                    <div className="flex items-start gap-2 rounded-2xl bg-emerald-500/15 px-3.5 py-2.5 text-xs font-semibold text-emerald-500">
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-start gap-2 rounded-2xl border border-emerald-400/30 bg-emerald-500/15 px-3.5 py-2.5 text-xs font-semibold text-emerald-500"
+                    >
                       <CheckCircle2 className="mt-0.5 size-4 shrink-0" />
                       <span>{info}</span>
-                    </div>
+                    </motion.div>
                   )}
 
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={busy}
-                    className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2563eb] via-[#dd2a7b] to-[#f58529] py-3 text-sm font-bold text-white shadow-[0_12px_28px_-8px_rgba(37,99,235,0.5)] transition active:scale-[0.98] disabled:opacity-60"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="glass-sheen flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#2563eb] via-[#dd2a7b] to-[#f58529] py-3 text-sm font-bold text-white shadow-[0_14px_30px_-8px_rgba(37,99,235,0.58)] transition disabled:opacity-60"
                   >
                     <span>
                       {busy
@@ -756,7 +839,7 @@ function AuthPage() {
                             : "Verify OTP & Reset Password"}
                     </span>
                     {!busy && <ArrowRight className="size-4" />}
-                  </button>
+                  </motion.button>
 
                   {mode === "login" && (
                     <p
@@ -769,7 +852,7 @@ function AuthPage() {
                       <button
                         type="button"
                         onClick={() => switchMode("register")}
-                        className="font-bold text-[#2563eb] hover:underline"
+                        className="font-bold text-[#3b82f6] hover:underline"
                       >
                         Sign Up
                       </button>

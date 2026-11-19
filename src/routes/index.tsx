@@ -2,7 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/Logo";
-import { InstallApp } from '@/components/InstallApp';
+import { InstallApp } from "@/components/InstallApp";
 import heroBooks from "@/assets/hero-books.jpg";
 
 export const Route = createFileRoute("/")({

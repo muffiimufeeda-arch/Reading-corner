@@ -55,14 +55,40 @@ export function InstagramShell({
     <div
       className={cn("relative flex h-[100dvh] flex-col overflow-hidden md:flex-row", theme.pageBg)}
     >
-      {/* Ambient studio backdrop matching user design */}
+      {/* Ambient studio backdrop + slow-drifting liquid glass light orbs */}
       <div className={cn("pointer-events-none fixed inset-0", theme.ambientBackdrop)} />
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <motion.div
+          animate={{
+            x: [0, 26, -14, 0],
+            y: [0, -18, 22, 0],
+            scale: [1, 1.08, 0.96, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className={cn(
+            "absolute -left-24 -top-24 size-96 rounded-full blur-3xl",
+            theme.glassOrbPrimary,
+          )}
+        />
+        <motion.div
+          animate={{
+            x: [0, -28, 18, 0],
+            y: [0, 22, -16, 0],
+            scale: [1.04, 0.95, 1.07, 1.04],
+          }}
+          transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+          className={cn(
+            "absolute -bottom-28 -right-24 size-[26rem] rounded-full blur-3xl",
+            theme.glassOrbSecondary,
+          )}
+        />
+      </div>
       <TripleTapExit />
 
-      {/* Desktop Left Navigation Rail (Instagram-inspired: strictly Chat & Profile) */}
+      {/* Desktop Left Frosted Glass Navigation Rail (Strictly Chat & Profile) */}
       <aside
         className={cn(
-          "relative z-10 hidden w-20 shrink-0 flex-col justify-between border-r py-5 backdrop-blur-xl md:flex lg:w-60 lg:px-4",
+          "relative z-10 hidden w-20 shrink-0 flex-col justify-between border-r py-5 backdrop-blur-2xl md:flex lg:w-60 lg:px-4",
           theme.border,
           theme.surfaceGlass,
         )}
@@ -75,7 +101,7 @@ export function InstagramShell({
           >
             <span
               className={cn(
-                "grid size-10 shrink-0 place-items-center rounded-2xl p-1.5",
+                "glass-sheen grid size-10 shrink-0 place-items-center rounded-2xl p-1.5",
                 theme.accentBg,
               )}
             >
@@ -96,11 +122,18 @@ export function InstagramShell({
               type="button"
               onClick={() => setTab("chat")}
               className={cn(
-                "flex min-h-[48px] w-full items-center justify-center gap-3 rounded-2xl px-3 text-sm font-bold transition lg:justify-start",
-                tab === "chat" ? theme.navActiveBg : theme.mutedText,
+                "relative flex min-h-[48px] w-full items-center justify-center gap-3 rounded-2xl px-3 text-sm font-bold transition lg:justify-start",
+                tab === "chat" ? theme.navActiveText : theme.mutedText,
               )}
             >
-              <span className="relative">
+              {tab === "chat" && (
+                <motion.span
+                  layoutId="desktopSecretNav"
+                  transition={{ type: "spring", stiffness: 360, damping: 30 }}
+                  className={cn("absolute inset-0 rounded-2xl", theme.navActiveBg)}
+                />
+              )}
+              <span className="relative z-10">
                 <MessageCircle className="size-5" />
                 {totalUnread > 0 && (
                   <span
@@ -113,20 +146,27 @@ export function InstagramShell({
                   </span>
                 )}
               </span>
-              <span className="hidden lg:inline">Chat</span>
+              <span className="relative z-10 hidden lg:inline">Chat</span>
             </button>
 
             <button
               type="button"
               onClick={() => setTab("profile")}
               className={cn(
-                "flex min-h-[48px] w-full items-center justify-center gap-3 rounded-2xl px-3 text-sm font-bold transition lg:justify-start",
-                tab === "profile" ? theme.navActiveBg : theme.mutedText,
+                "relative flex min-h-[48px] w-full items-center justify-center gap-3 rounded-2xl px-3 text-sm font-bold transition lg:justify-start",
+                tab === "profile" ? theme.navActiveText : theme.mutedText,
               )}
             >
+              {tab === "profile" && (
+                <motion.span
+                  layoutId="desktopSecretNav"
+                  transition={{ type: "spring", stiffness: 360, damping: 30 }}
+                  className={cn("absolute inset-0 rounded-2xl", theme.navActiveBg)}
+                />
+              )}
               <span
                 className={cn(
-                  "grid size-6 place-items-center rounded-full p-[1.5px]",
+                  "relative z-10 grid size-6 place-items-center rounded-full p-[1.5px]",
                   theme.ringGradient,
                 )}
               >
@@ -143,7 +183,7 @@ export function InstagramShell({
                   )}
                 </span>
               </span>
-              <span className="hidden lg:inline">Profile</span>
+              <span className="relative z-10 hidden lg:inline">Profile</span>
             </button>
           </nav>
         </div>
@@ -153,16 +193,16 @@ export function InstagramShell({
         </p>
       </aside>
 
-      {/* Main Content Area with Smooth Transitions */}
+      {/* Main Content Area with Smooth Glass Transitions */}
       <main className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <AnimatePresence mode="wait">
           {tab === "chat" ? (
             <motion.div
               key="chat"
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -8 }}
-              transition={{ duration: 0.16 }}
+              initial={{ opacity: 0, y: 8, scale: 0.99 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.99 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               className="flex min-h-0 flex-1 flex-col overflow-hidden"
             >
               <InstagramChatView
@@ -174,10 +214,10 @@ export function InstagramShell({
           ) : (
             <motion.div
               key="profile"
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              transition={{ duration: 0.16 }}
+              initial={{ opacity: 0, y: 8, scale: 0.99 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.99 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               className="flex min-h-0 flex-1 flex-col overflow-hidden"
             >
               <InstagramProfileView
@@ -190,11 +230,14 @@ export function InstagramShell({
         </AnimatePresence>
       </main>
 
-      {/* Floating Glass Mobile Bottom Navigation (Strictly Chat & Profile) */}
+      {/* Floating Glass Mobile Bottom Pill (Strictly Chat & Profile) */}
       {!(tab === "chat" && threadOpenOnMobile) && (
-        <nav
+        <motion.nav
+          initial={{ y: 24, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           className={cn(
-            "fixed inset-x-3 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-30 rounded-[26px] border p-1.5 backdrop-blur-xl md:hidden",
+            "fixed inset-x-3 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-30 rounded-[28px] border p-1.5 backdrop-blur-2xl md:hidden",
             theme.navBg,
           )}
         >
@@ -203,11 +246,18 @@ export function InstagramShell({
               type="button"
               onClick={() => setTab("chat")}
               className={cn(
-                "flex min-h-[48px] items-center justify-center gap-2 rounded-[20px] px-4 text-xs font-bold transition",
-                tab === "chat" ? theme.navActiveBg : theme.mutedText,
+                "relative flex min-h-[48px] items-center justify-center gap-2 rounded-[22px] px-4 text-xs font-bold transition",
+                tab === "chat" ? theme.navActiveText : theme.mutedText,
               )}
             >
-              <span className="relative">
+              {tab === "chat" && (
+                <motion.span
+                  layoutId="mobileSecretNav"
+                  transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                  className={cn("glass-sheen absolute inset-0 rounded-[22px]", theme.navActiveBg)}
+                />
+              )}
+              <span className="relative z-10">
                 <MessageCircle className="size-5" />
                 {totalUnread > 0 && (
                   <span
@@ -220,39 +270,46 @@ export function InstagramShell({
                   </span>
                 )}
               </span>
-              <span>Chat</span>
+              <span className="relative z-10">Chat</span>
             </button>
 
             <button
               type="button"
               onClick={() => setTab("profile")}
               className={cn(
-                "flex min-h-[48px] items-center justify-center gap-2 rounded-[20px] px-4 text-xs font-bold transition",
-                tab === "profile" ? theme.navActiveBg : theme.mutedText,
+                "relative flex min-h-[48px] items-center justify-center gap-2 rounded-[22px] px-4 text-xs font-bold transition",
+                tab === "profile" ? theme.navActiveText : theme.mutedText,
               )}
             >
-              <User className="size-5" />
-              <span>Profile</span>
+              {tab === "profile" && (
+                <motion.span
+                  layoutId="mobileSecretNav"
+                  transition={{ type: "spring", stiffness: 360, damping: 28 }}
+                  className={cn("glass-sheen absolute inset-0 rounded-[22px]", theme.navActiveBg)}
+                />
+              )}
+              <User className="relative z-10 size-5" />
+              <span className="relative z-10">Profile</span>
             </button>
           </div>
-        </nav>
+        </motion.nav>
       )}
 
-      {/* Real-time Incoming / Outgoing Call Modal */}
+      {/* Real-time Incoming / Outgoing Frosted Glass Call Modal */}
       <AnimatePresence>
         {(incomingCall || outgoingCall) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-50 grid place-items-center bg-black/75 p-4 backdrop-blur-lg"
           >
             <motion.div
-              initial={{ scale: 0.94, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.94, opacity: 0 }}
+              initial={{ scale: 0.92, opacity: 0, y: 12 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 12 }}
               className={cn(
-                "w-full max-w-xs rounded-3xl border p-6 text-center shadow-2xl",
+                "glass-sheen w-full max-w-xs rounded-[32px] border p-6 text-center backdrop-blur-2xl",
                 theme.surfaceGlass,
                 theme.border,
               )}
@@ -283,7 +340,7 @@ export function InstagramShell({
                       onClick={() =>
                         respondToCall(incomingCall.callId, incomingCall.from.id, "declined")
                       }
-                      className="grid size-14 place-items-center rounded-full bg-rose-600 text-white"
+                      className="grid size-14 place-items-center rounded-full bg-rose-600 text-white shadow-lg transition hover:scale-105"
                       aria-label="Decline call"
                     >
                       <PhoneOff className="size-6" />
@@ -293,7 +350,7 @@ export function InstagramShell({
                       onClick={() =>
                         respondToCall(incomingCall.callId, incomingCall.from.id, "accepted")
                       }
-                      className="grid size-14 place-items-center rounded-full bg-emerald-600 text-white"
+                      className="grid size-14 place-items-center rounded-full bg-emerald-600 text-white shadow-lg transition hover:scale-105"
                       aria-label="Accept call"
                     >
                       <Phone className="size-6" />
@@ -325,7 +382,7 @@ export function InstagramShell({
                     onClick={() =>
                       respondToCall(outgoingCall.callId, outgoingCall.target.id, "ended")
                     }
-                    className="mx-auto mt-6 grid size-14 place-items-center rounded-full bg-rose-600 text-white"
+                    className="mx-auto mt-6 grid size-14 place-items-center rounded-full bg-rose-600 text-white shadow-lg transition hover:scale-105"
                     aria-label="End call"
                   >
                     <PhoneOff className="size-6" />

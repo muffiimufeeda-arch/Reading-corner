@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "sonner";
 
-import { InstallProvider } from '../components/InstallApp';
+import { InstallProvider } from "../components/InstallApp";
 import appCss from "../styles.css?url";
 import { LibraryProvider } from "../lib/library-store";
 import { SecretGesture } from "../components/SecretGesture";
@@ -138,7 +138,9 @@ function RootComponent() {
         <SecretGesture />
         <Toaster position="top-center" richColors />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <InstallProvider><Outlet /></InstallProvider>
+        <InstallProvider>
+          <Outlet />
+        </InstallProvider>
       </LibraryProvider>
     </QueryClientProvider>
   );
