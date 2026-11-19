@@ -27,6 +27,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as BookBookIdRouteImport } from './routes/book.$bookId'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 import { Route as LanguageCodeRouteImport } from './routes/language.$code'
+import { Route as NfcTokenRouteImport } from './routes/nfc.$token'
 import { Route as OnboardingCategoriesRouteImport } from './routes/onboarding.categories'
 import { Route as OnboardingLanguageRouteImport } from './routes/onboarding.language'
 import { Route as ReadBookIdRouteImport } from './routes/read.$bookId'
@@ -121,6 +122,11 @@ const LanguageCodeRoute = LanguageCodeRouteImport.update({
   path: '/language/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NfcTokenRoute = NfcTokenRouteImport.update({
+  id: '/nfc/$token',
+  path: '/nfc/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingCategoriesRoute = OnboardingCategoriesRouteImport.update({
   id: '/onboarding/categories',
   path: '/onboarding/categories',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/book/$bookId': typeof BookBookIdRoute
   '/category/$slug': typeof CategorySlugRoute
   '/language/$code': typeof LanguageCodeRoute
+  '/nfc/$token': typeof NfcTokenRoute
   '/onboarding/categories': typeof OnboardingCategoriesRoute
   '/onboarding/language': typeof OnboardingLanguageRoute
   '/read/$bookId': typeof ReadBookIdRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/book/$bookId': typeof BookBookIdRoute
   '/category/$slug': typeof CategorySlugRoute
   '/language/$code': typeof LanguageCodeRoute
+  '/nfc/$token': typeof NfcTokenRoute
   '/onboarding/categories': typeof OnboardingCategoriesRoute
   '/onboarding/language': typeof OnboardingLanguageRoute
   '/read/$bookId': typeof ReadBookIdRoute
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   '/book/$bookId': typeof BookBookIdRoute
   '/category/$slug': typeof CategorySlugRoute
   '/language/$code': typeof LanguageCodeRoute
+  '/nfc/$token': typeof NfcTokenRoute
   '/onboarding/categories': typeof OnboardingCategoriesRoute
   '/onboarding/language': typeof OnboardingLanguageRoute
   '/read/$bookId': typeof ReadBookIdRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/book/$bookId'
     | '/category/$slug'
     | '/language/$code'
+    | '/nfc/$token'
     | '/onboarding/categories'
     | '/onboarding/language'
     | '/read/$bookId'
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/book/$bookId'
     | '/category/$slug'
     | '/language/$code'
+    | '/nfc/$token'
     | '/onboarding/categories'
     | '/onboarding/language'
     | '/read/$bookId'
@@ -274,6 +285,7 @@ export interface FileRouteTypes {
     | '/book/$bookId'
     | '/category/$slug'
     | '/language/$code'
+    | '/nfc/$token'
     | '/onboarding/categories'
     | '/onboarding/language'
     | '/read/$bookId'
@@ -298,6 +310,7 @@ export interface RootRouteChildren {
   BookBookIdRoute: typeof BookBookIdRoute
   CategorySlugRoute: typeof CategorySlugRoute
   LanguageCodeRoute: typeof LanguageCodeRoute
+  NfcTokenRoute: typeof NfcTokenRoute
   OnboardingCategoriesRoute: typeof OnboardingCategoriesRoute
   OnboardingLanguageRoute: typeof OnboardingLanguageRoute
   ReadBookIdRoute: typeof ReadBookIdRoute
@@ -431,6 +444,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nfc/$token': {
+      id: '/nfc/$token'
+      path: '/nfc/$token'
+      fullPath: '/nfc/$token'
+      preLoaderRoute: typeof NfcTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding/categories': {
       id: '/onboarding/categories'
       path: '/onboarding/categories'
@@ -474,6 +494,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookBookIdRoute: BookBookIdRoute,
   CategorySlugRoute: CategorySlugRoute,
   LanguageCodeRoute: LanguageCodeRoute,
+  NfcTokenRoute: NfcTokenRoute,
   OnboardingCategoriesRoute: OnboardingCategoriesRoute,
   OnboardingLanguageRoute: OnboardingLanguageRoute,
   ReadBookIdRoute: ReadBookIdRoute,
