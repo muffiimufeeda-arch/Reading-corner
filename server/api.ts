@@ -313,43 +313,36 @@ export function createApiRouter() {
 
       const userId = `u_${crypto.randomUUID()}`;
       const now = new Date().toISOString();
-      let avatarMediaId: string | null = null;
-
-      // Support optional initial profile photo upload cleanly as private/avatar media
-      if (avatarDataUrl && avatarDataUrl.startsWith("data:image/")) {
-        const match = /^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/.exec(avatarDataUrl);
-        if (match && match[1] && match[2]) {
-          const buf = Buffer.from(match[2], "base64");
-          if (buf.byteLength <= 4 * 1024 * 1024) {
-            const ext = match[1].split("/")[1]?.replace(/[^a-z0-9]/gi, "") || "jpg";
-            const fileName = `avatar_${userId}.${ext}`;
-            fs.writeFileSync(path.join(mediaDir, fileName), buf);
-            avatarMediaId = `med_${crypto.randomUUID()}`;
-            db.prepare(
-              "INSERT INTO media_objects (id, owner_id, recipient_id, kind, mime_type, original_name, file_path, size_bytes, is_public_avatar, created_at) VALUES (?, ?, NULL, 'image', ?, ?, ?, ?, 1, ?)",
-            ).run(avatarMediaId, userId, match[1], fileName, fileName, buf.byteLength, now);
-          }
-        }
+      const photo = avatarDataUrl && /^data:image\/(png|jpeg|webp|gif);base64,([A-Za-z0-9+/]+=*)$/.exec(avatarDataUrl);
+      const buffer = photo ? Buffer.from(photo[2], "base64") : null;
+      if (avatarDataUrl && (!buffer?.length || buffer.length > 4 * 1024 * 1024)) {
+        res.status(400).json({ error: "Choose a PNG, JPEG, WebP or GIF profile photo under 4 MB." });
+        return;
       }
-
-      db.prepare(
-        `INSERT INTO users (id, phone_e164, phone_verified, full_name, display_handle, bio, avatar_media_id, password_hash, theme, created_at, last_active_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'instagram', ?, ?)`,
-      ).run(
-        userId,
-        phoneE164,
-        phoneVerified,
-        name,
-        makeHandle(name),
-        String(bio).trim().slice(0, 200),
-        avatarMediaId,
-        hashPassword(pwd),
-        now,
-        now,
-      );
-
-      createNfcTokenForUser(userId);
-      const token = issueSession(userId, req, res);
+      let token: string;
+      let writtenPhoto: string | undefined;
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        db.prepare(`INSERT INTO users (id, phone_e164, phone_verified, full_name, display_handle, bio, password_hash, theme, created_at, last_active_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, 'instagram', ?, ?)`)
+          .run(userId, phoneE164, phoneVerified, name, makeHandle(name), String(bio).trim().slice(0, 200), hashPassword(pwd), now, now);
+        if (photo && buffer) {
+          const fileName = `avatar_${userId}.${photo[1]}`;
+          const mediaId = `med_${crypto.randomUUID()}`;
+          writtenPhoto = path.join(mediaDir, fileName);
+          fs.writeFileSync(writtenPhoto, buffer);
+          db.prepare("INSERT INTO media_objects (id, owner_id, kind, mime_type, original_name, file_path, size_bytes, is_public_avatar, created_at) VALUES (?, ?, 'image', ?, ?, ?, ?, 1, ?)")
+            .run(mediaId, userId, `image/${photo[1]}`, fileName, fileName, buffer.length, now);
+          db.prepare("UPDATE users SET avatar_media_id = ? WHERE id = ?").run(mediaId, userId);
+        }
+        createNfcTokenForUser(userId);
+        token = issueSession(userId, req, res);
+        db.exec("COMMIT");
+      } catch (err) {
+        db.exec("ROLLBACK");
+        if (writtenPhoto) fs.rmSync(writtenPhoto, { force: true });
+        throw err;
+      }
       const user = db.prepare("SELECT * FROM users WHERE id = ?").get(userId) as DbUser;
 
       res.status(201).json({
