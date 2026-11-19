@@ -1,4 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { InstallApp } from '@/components/InstallApp';
 import { RotateCcw } from "lucide-react";
 
 import { AppShell, PageHeader } from "@/components/AppShell";
@@ -109,6 +110,8 @@ function SettingsPage() {
             </Link>
           </div>
         </Card>
+
+        <InstallApp />
 
         <Card title="Data">
           <p className="text-sm text-muted-foreground">

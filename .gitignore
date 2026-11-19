@@ -1,5 +1,9 @@
 node_modules/
 build/
+.vercel/
+.output/
+.tanstack/
+.data/
 dist/
 coverage/
 .DS_Store
